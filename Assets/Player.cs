@@ -29,6 +29,10 @@ public class Player : MonoBehaviour
 
     public Vector3 velocity;
 
+    public bool stopped;
+    public GameObject gun;
+    public GameObject[] gunUI;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -65,15 +69,40 @@ public class Player : MonoBehaviour
         cam.localRotation = Quaternion.Euler(xRot, yRot, 0f);
 
         //  Movement stuff, can't move if not on ground because wheelchair
-        if (grounded)
+        if (grounded && !stopped)
         {
             horizIn = Input.GetAxisRaw("Horizontal");
             vertiIn = Input.GetAxisRaw("Vertical");
+
+         /*   if(horizIn + vertiIn == 0){
+                stopped = true;
+            } else {
+                stopped = false;
+            }*/
 
 
             orient.Rotate(Vector3.up * horizIn * rotSpeed * Time.deltaTime * (vertiIn >= 0f ? 1f : -1f));
             velocity += orient.forward * vertiIn * moveSpeed;
         }
+
+        if(stopped){
+            gun.SetActive(true);
+            gunUI[0].SetActive(true);
+            gunUI[1].SetActive(false);
+        } else {
+            gunUI[1].SetActive(true);
+            gunUI[0].SetActive(false);
+            gun.SetActive(false);
+        }
+        if(Input.mouseScrollDelta.y != 0){
+            stopped = !stopped;
+        }
         cc.Move(velocity * Time.deltaTime);
     }
+
+    /*void FixedUpdate(){
+        if(Input.mouseScrollDelta.y != 0){
+            stopped = !stopped;
+        }
+    }*/
 }
