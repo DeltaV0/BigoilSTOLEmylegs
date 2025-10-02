@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 167397004}
   - component: {fileID: 167397006}
   - component: {fileID: 167397007}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 428502422}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 437548903}
   - component: {fileID: 437548901}
   - component: {fileID: 437548904}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,12 +593,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orient: {fileID: 437548903}
   rotSpeed: 45
-  moveSpeed: 0
-  sensX: 100
-  sensY: 100
+  moveSpeed: 2
+  sensX: 1
+  sensY: 1
   cam: {fileID: 330585546}
   xRot: 0
   yRot: 0
+  grounded: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
+  groundDist: 0.02
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!4 &437548903
 Transform:
   m_ObjectHideFlags: 0
@@ -638,7 +644,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &492310113
@@ -810,7 +816,7 @@ GameObject:
   - component: {fileID: 1179506227}
   - component: {fileID: 1179506226}
   - component: {fileID: 1179506225}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +925,7 @@ GameObject:
   - component: {fileID: 1190670962}
   - component: {fileID: 1190670964}
   - component: {fileID: 1190670965}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1073,7 @@ GameObject:
   - component: {fileID: 2136678907}
   - component: {fileID: 2136678906}
   - component: {fileID: 2136678905}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chair (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
