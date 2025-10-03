@@ -29,9 +29,7 @@ public class Player : MonoBehaviour
 
     public Vector3 velocity;
 
-    public bool stopped;
-    public GameObject gun;
-    public GameObject[] gunUI;
+    public selector halt;
 
     void Start()
     {
@@ -69,7 +67,7 @@ public class Player : MonoBehaviour
         cam.localRotation = Quaternion.Euler(xRot, yRot, 0f);
 
         //  Movement stuff, can't move if not on ground because wheelchair
-        if (grounded && !stopped)
+        if (grounded && !halt.stopped)
         {
             horizIn = Input.GetAxisRaw("Horizontal");
             vertiIn = Input.GetAxisRaw("Vertical");
@@ -85,18 +83,7 @@ public class Player : MonoBehaviour
             velocity += orient.forward * vertiIn * moveSpeed;
         }
 
-        if(stopped){
-            gun.SetActive(true);
-            gunUI[0].SetActive(true);
-            gunUI[1].SetActive(false);
-        } else {
-            gunUI[1].SetActive(true);
-            gunUI[0].SetActive(false);
-            gun.SetActive(false);
-        }
-        if(Input.mouseScrollDelta.y != 0){
-            stopped = !stopped;
-        }
+        
         cc.Move(velocity * Time.deltaTime);
     }
 
