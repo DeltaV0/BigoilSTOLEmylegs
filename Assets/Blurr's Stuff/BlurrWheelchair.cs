@@ -41,6 +41,9 @@ public class BlurrWheelchair : MonoBehaviour
     [SerializeField] private bool grounded = false;
     [SerializeField] private LayerMask groundMask;
 
+    [Header("Selector/Inventory Script")]
+    [SerializeField] private selector halt;
+
     #endregion
 
     #region public references
@@ -149,17 +152,18 @@ public class BlurrWheelchair : MonoBehaviour
         cc.Move(velocity * Time.deltaTime);
 
         //calculate and move the chair forward
+        
         moveSpeed = Mathf.Clamp(moveSpeed + (isMovingForward ? accelerationRate : -decelerationRate) * Time.deltaTime, 0f, maxSpeed);
         cc.Move((transform.forward * moveSpeed) * Time.deltaTime);
 
         //calculate and turn the chair
         float targetRotSpeed = 0f;
 
-        if (isTurningLeft && !isTurningRight)
+        if (isTurningLeft && !isTurningRight && !halt.stopped)
         {
             targetRotSpeed = -rotMaxSpeed;
         }
-        else if (isTurningRight && !isTurningLeft)
+        else if (isTurningRight && !isTurningLeft && !halt.stopped)
         {
             targetRotSpeed = rotMaxSpeed;
         }
@@ -185,7 +189,7 @@ public class BlurrWheelchair : MonoBehaviour
     private void NormalControlsMovement()
     {
         //includes only the specific logic for this movement mode
-        if (isTurningLeft && isTurningRight)
+        if (isTurningLeft && isTurningRight && !halt.stopped)
         {
             isMovingForward = true;
         }
