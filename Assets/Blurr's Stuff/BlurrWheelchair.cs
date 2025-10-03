@@ -9,16 +9,16 @@ public class BlurrWheelchair : MonoBehaviour
     [Header("Speed Settings")]
     //Tune these settings to control the max speed, how long it takes to go from 0 to max, and time to go from max to 0
     [SerializeField] private float maxSpeed = 5.0f;
-    [SerializeField] private float accelerationTime = 0.5f;
-    [SerializeField] private float decelerationTime = 1.0f;
-    private float moveSpeed;
+    [SerializeField] private float accelerationRate = 0.5f;
+    [SerializeField] private float decelerationRate = 1.0f;
+    [SerializeField] private float moveSpeed;
 
     [Header("Turn Settings")]
     //Tune these settings to control the max turn speed, how long it takes to go from 0 to max, and time to go from max to 0
     [SerializeField] private float rotMaxSpeed = 45.0f;
-    [SerializeField] private float rotAccelerationTime = 0.2f;
-    [SerializeField] private float rotDecelerationTime = 0.5f;
-    private float rotSpeed;
+    [SerializeField] private float rotAccelerationRate = 0.2f;
+    [SerializeField] private float rotDecelerationRate = 0.5f;
+    [SerializeField] private float rotSpeed;
 
     [Header("Control Settings")]
     //Alter which keys control certain actions, fairly self explanitory
@@ -34,6 +34,8 @@ public class BlurrWheelchair : MonoBehaviour
     [Header("Misc. Settings")]
     //Simple Controls makes turning more intuitive, and moving forward and backward easier
     [SerializeField] private bool simpleControls;
+    [SerializeField] private float sensX;
+    [SerializeField] private float sensY;
 
     [Header("Grounded Attributes")]
     [SerializeField] private bool grounded = false;
@@ -61,26 +63,16 @@ public class BlurrWheelchair : MonoBehaviour
     [SerializeField] private bool isTurningLeft;
     [SerializeField] private bool isMovingForward;
 
-    [SerializeField] private float horizIn;
-    [SerializeField] private float vertiIn;
-
     private Vector3 moveDir;
 
     private float groundDist = 0.02f;
 
     private Vector3 velocity;
 
+    private float xCamRot;
+    private float yCamRot;
+
     #endregion
-
-    public float sensX;
-    public float sensY;
-
-    public float xCamRot;
-    public float yCamRot;
-
-    
-
-    
 
     void Start()
     {
@@ -88,6 +80,8 @@ public class BlurrWheelchair : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cc = GetComponent<CharacterController>();
+
+        SimpleControlsMovement();
     }
 
     // Update is called once per frame
@@ -119,56 +113,93 @@ public class BlurrWheelchair : MonoBehaviour
         cam.localRotation = Quaternion.Euler(xCamRot, yCamRot, 0f);
 
         ManageMovementInput();
-        SimpleControlsMovement();
+        
+        if (simpleControls)
+        {
+            SimpleControlsMovement();
+        }
+        else
+        {
+            NormalControlsMovement();
+        }
+        
+        CalculateMoveAndTurnSpeed();
     }
 
     #region movement methods
 
     private void ManageMovementInput()
     {
-        isTurningLeft = Input.GetKey(turnLeft);
-        isTurningRight = Input.GetKey(turnRight);
-
-        if (isTurningLeft && !isTurningRight)
+        //  Movement stuff, can't move if not on ground because wheelchair
+        if (grounded)
         {
-            horizIn = 1f;
-        }
-        else if (!isTurningLeft && isTurningRight)
-        {
-            horizIn = -1f;
+            isTurningLeft = Input.GetKey(turnLeft);
+            isTurningRight = Input.GetKey(turnRight);
         }
         else
         {
-            horizIn = 0f;
+            isTurningLeft = false;
+            isTurningRight = false;
         }
+        
     }
 
     private void CalculateMoveAndTurnSpeed()
     {
-        moveSpeed = 1;
+        cc.Move(velocity * Time.deltaTime);
+
+        //calculate and move the chair forward
+        moveSpeed = Mathf.Clamp(moveSpeed + (isMovingForward ? accelerationRate : -decelerationRate) * Time.deltaTime, 0f, maxSpeed);
+        cc.Move((transform.forward * moveSpeed) * Time.deltaTime);
+
+        //calculate and turn the chair
+        float targetRotSpeed = 0f;
+
+        if (isTurningLeft && !isTurningRight)
+        {
+            targetRotSpeed = -rotMaxSpeed;
+        }
+        else if (isTurningRight && !isTurningLeft)
+        {
+            targetRotSpeed = rotMaxSpeed;
+        }
+        else
+        {
+            targetRotSpeed = 0f;
+        }
+
+        if (rotSpeed < targetRotSpeed)
+        {
+            rotSpeed = Mathf.Min(rotSpeed + rotAccelerationRate * Time.deltaTime, targetRotSpeed);
+        }
+        else if (rotSpeed > targetRotSpeed)
+        {
+            rotSpeed = Mathf.Max(rotSpeed - rotAccelerationRate * Time.deltaTime, targetRotSpeed);
+        }
+
+        // Apply rotation
+        transform.Rotate(Vector3.up * rotSpeed * Time.deltaTime);
     }
 
     //use this method for normal controls
     private void NormalControlsMovement()
     {
+        //includes only the specific logic for this movement mode
         if (isTurningLeft && isTurningRight)
         {
             isMovingForward = true;
         }
+        else
+        {
+            isMovingForward = false;
+        }
+        
     }
 
     //use this method for simple controls
     private void SimpleControlsMovement()
     {
-        //  Movement stuff, can't move if not on ground because wheelchair
-        if (grounded)
-        {
-
-
-            orient.Rotate(Vector3.up * horizIn * rotSpeed * Time.deltaTime * (vertiIn >= 0f ? 1f : -1f));
-            velocity += orient.forward * vertiIn * moveSpeed;
-        }
-        cc.Move(velocity * Time.deltaTime);
+        //Not made yet
     }
 
     #endregion
