@@ -39,6 +39,8 @@ public class BlurrWheelchair : MonoBehaviour
 
     [Header("Grounded Attributes")]
     [SerializeField] private bool grounded = false;
+
+    [SerializeField] private bool groundedLeeway = false;
     [SerializeField] private LayerMask groundMask;
 
     [Header("Selector/Inventory Script")]
@@ -68,7 +70,7 @@ public class BlurrWheelchair : MonoBehaviour
 
     private Vector3 moveDir;
 
-    private float groundDist = 0.04f;
+    [SerializeField] private float groundDist = 0.02f;
 
     private Vector3 velocity;
 
@@ -122,7 +124,8 @@ public class BlurrWheelchair : MonoBehaviour
         Vector3 center = transform.position + cc.center;
         Vector3 offset = transform.up * Mathf.Max(cc.height - 2f * cc.radius) / 2f;
         grounded = Physics.CapsuleCast(center + offset, center - offset, cc.radius, Vector3.down, groundDist, groundMask);
-        if(grounded)
+        groundedLeeway = Physics.CapsuleCast(center + offset, center - offset, cc.radius * 3f, Vector3.down, groundDist, groundMask);
+        if (grounded)
         {
             //  Even if we're on the ground, move down a little, just to account for discrepancies
             velocity = Vector3.down * -0.1f;
@@ -162,7 +165,7 @@ public class BlurrWheelchair : MonoBehaviour
     private void ManageMovementInput()
     {
         //  Movement stuff, can't move if not on ground because wheelchair
-        if (grounded)
+        if (grounded || groundedLeeway)
         {
             isTurningLeft = Input.GetKey(turnLeft);
             isTurningRight = Input.GetKey(turnRight);
