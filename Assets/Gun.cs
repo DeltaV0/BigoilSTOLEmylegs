@@ -31,7 +31,7 @@ public class Gun : MonoBehaviour
              }*/
 
             GameObject bullet2 = Instantiate(bullet, a.position, a.rotation);
-            bullet2.GetComponent<Rigidbody>().linearVelocity = a.forward * 10;
+            bullet2.GetComponent<Rigidbody>().linearVelocity = a.forward * 25f;
 
          }
     }

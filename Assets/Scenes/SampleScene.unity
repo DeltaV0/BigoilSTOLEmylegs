@@ -4122,11 +4122,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136678903}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1275046243377796510 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1680516034260131614, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-  m_PrefabInstance: {fileID: 5790256107067844786}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5328832319714679534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4196,14 +4191,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 62738483838928330, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 1275046243377796510}
-    - target: {fileID: 62738483838928330, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: Lock
-      value: 
-      objectReference: {fileID: 6212663608009107897}
     - target: {fileID: 924139352637561354, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
       propertyPath: m_Name
       value: LockedDoorBasic
@@ -4248,34 +4235,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5873363925068370178, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: m_Size.x
-      value: 2.1443558
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873363925068370178, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: m_Size.y
-      value: 1.9953907
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873363925068370178, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: m_Size.z
-      value: 1.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873363925068370178, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: m_Center.x
-      value: 0.09401369
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873363925068370178, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: m_Center.y
-      value: -0.06116809
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873363925068370178, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8173788505017047881, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-      propertyPath: m_TagString
-      value: Lock
-      objectReference: {fileID: 0}
     - target: {fileID: 8666197989496850285, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
       propertyPath: m_ConnectedBody
       value: 
@@ -4285,11 +4244,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
---- !u!1 &6212663608009107897 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5011475530347419154, guid: 0c71cef336a25ad44a85ce88103d49bf, type: 3}
-  m_PrefabInstance: {fileID: 5790256107067844786}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7628930273207669027
 PrefabInstance:
   m_ObjectHideFlags: 0

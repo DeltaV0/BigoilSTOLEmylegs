@@ -136,15 +136,15 @@ public class BlurrWheelchair : MonoBehaviour
         }
 
         //  Look stuff
-        float mousex = Input.GetAxisRaw("Mouse X") * sensX;
-        float mousey = Input.GetAxisRaw("Mouse Y") * sensY;
+        //float mousex = Input.GetAxisRaw("Mouse X") * sensX;
+       // float mousey = Input.GetAxisRaw("Mouse Y") * sensY;
 
-        yCamRot += mousex;
-        xCamRot -= mousey;
+        //yCamRot += mousex;
+       // xCamRot -= mousey;
 
-        xCamRot = Mathf.Clamp(xCamRot, -90f, 90f);
-        yCamRot = Mathf.Clamp(yCamRot, -90f, 90f);
-        cam.localRotation = Quaternion.Euler(xCamRot, yCamRot, 0f);
+        //xCamRot = Mathf.Clamp(xCamRot, -90f, 90f);
+        //yCamRot = Mathf.Clamp(yCamRot, -90f, 90f);
+       // cam.localRotation = Quaternion.Euler(xCamRot, yCamRot, 0f);
 
         ManageMovementInput();
         
