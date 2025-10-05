@@ -68,7 +68,7 @@ public class BlurrWheelchair : MonoBehaviour
 
     private Vector3 moveDir;
 
-    private float groundDist = 0.02f;
+    private float groundDist = 0.04f;
 
     private Vector3 velocity;
 
