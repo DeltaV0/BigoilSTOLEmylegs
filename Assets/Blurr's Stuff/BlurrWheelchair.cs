@@ -40,7 +40,6 @@ public class BlurrWheelchair : MonoBehaviour
     [Header("Grounded Attributes")]
     [SerializeField] private bool grounded = false;
 
-    [SerializeField] private bool groundedLeeway = false;
     [SerializeField] private LayerMask groundMask;
 
     [Header("Selector/Inventory Script")]
@@ -72,7 +71,7 @@ public class BlurrWheelchair : MonoBehaviour
 
     [SerializeField] private float groundDist = 0.02f;
 
-    private Vector3 velocity;
+    public Vector3 velocity;
 
     private float xCamRot;
     private float yCamRot;
@@ -120,31 +119,23 @@ public class BlurrWheelchair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(velocity.y > 0)
+        {
+            Debug.Log("We're moving up by " + velocity.y);
+        }
         //  Are we on the ground
         Vector3 center = transform.position + cc.center;
         Vector3 offset = transform.up * Mathf.Max(cc.height - 2f * cc.radius) / 2f;
         grounded = Physics.CapsuleCast(center + offset, center - offset, cc.radius, Vector3.down, groundDist, groundMask);
-        groundedLeeway = Physics.CapsuleCast(center + offset, center - offset, cc.radius, Vector3.down, groundDist * 3f, groundMask);
         if (grounded)
         {
             //  Even if we're on the ground, move down a little, just to account for discrepancies
-            velocity = Vector3.down * -0.1f;
+            velocity = Vector3.down * 0.1f;
         }
         else
         {
             velocity += Physics.gravity * Time.deltaTime;
         }
-
-        //  Look stuff
-        //float mousex = Input.GetAxisRaw("Mouse X") * sensX;
-       // float mousey = Input.GetAxisRaw("Mouse Y") * sensY;
-
-        //yCamRot += mousex;
-       // xCamRot -= mousey;
-
-        //xCamRot = Mathf.Clamp(xCamRot, -90f, 90f);
-        //yCamRot = Mathf.Clamp(yCamRot, -90f, 90f);
-       // cam.localRotation = Quaternion.Euler(xCamRot, yCamRot, 0f);
 
         ManageMovementInput();
         
@@ -165,7 +156,7 @@ public class BlurrWheelchair : MonoBehaviour
     private void ManageMovementInput()
     {
         //  Movement stuff, can't move if not on ground because wheelchair
-        if (grounded || groundedLeeway)
+        if (grounded)
         {
             isTurningLeft = Input.GetKey(turnLeft);
             isTurningRight = Input.GetKey(turnRight);
