@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public LineRenderer lr;
+    //public LineRenderer lr;
     [SerializeField] private selector halt;
 
     public Transform a;
+
+    public GameObject bullet;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,7 +19,7 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && halt.stopped)
         {
-            RaycastHit hit;
+            /*RaycastHit hit;
             if (Physics.Raycast(a.position, a.forward, out hit, 25f))
             {
                 lr.SetPosition(0, a.position);
@@ -26,7 +28,10 @@ public class Gun : MonoBehaviour
                     Debug.Log("aaa");
                     hit.transform.root.GetComponent<DoorLocked>().Unlock();
                  }
-             }
+             }*/
+
+            GameObject bullet2 = Instantiate(bullet, a.position, a.rotation);
+            bullet2.GetComponent<Rigidbody>().linearVelocity = a.forward * 10;
 
          }
     }
