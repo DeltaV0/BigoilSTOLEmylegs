@@ -124,7 +124,7 @@ public class BlurrWheelchair : MonoBehaviour
         Vector3 center = transform.position + cc.center;
         Vector3 offset = transform.up * Mathf.Max(cc.height - 2f * cc.radius) / 2f;
         grounded = Physics.CapsuleCast(center + offset, center - offset, cc.radius, Vector3.down, groundDist, groundMask);
-        groundedLeeway = Physics.CapsuleCast(center + offset, center - offset, cc.radius * 3f, Vector3.down, groundDist, groundMask);
+        groundedLeeway = Physics.CapsuleCast(center + offset, center - offset, cc.radius, Vector3.down, groundDist * 3f, groundMask);
         if (grounded)
         {
             //  Even if we're on the ground, move down a little, just to account for discrepancies
