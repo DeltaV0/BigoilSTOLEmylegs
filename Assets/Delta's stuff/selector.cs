@@ -5,6 +5,8 @@ public class selector : MonoBehaviour
     public bool stopped;
     public GameObject gun;
     public GameObject[] gunUI;
+
+    //public int[] Inventory;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
