@@ -1494,12 +1494,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 4
-  accelerationRate: 1
-  decelerationRate: 2
+  accelerationRate: 3
+  decelerationRate: 6
   moveSpeed: 0
   rotMaxSpeed: 90
-  rotAccelerationRate: 45
-  rotDecelerationRate: 90
+  rotAccelerationRate: 90
+  rotDecelerationRate: 180
   rotSpeed: 0
   turnRight: 100
   turnLeft: 97
@@ -1509,7 +1509,6 @@ MonoBehaviour:
   sensX: 1
   sensY: 1
   grounded: 0
-  groundedLeeway: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1519,6 +1518,7 @@ MonoBehaviour:
   isTurningLeft: 0
   isMovingForward: 0
   groundDist: 0.02
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &437548906
 MonoBehaviour:
   m_ObjectHideFlags: 0
