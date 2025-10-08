@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     public Transform[] tips;
 
     public Transform[] tipstarget;
+
+    public Vector3[] tipstargetPos;
     //public Transform[] tipstarget;
 
     public int[] timer;
@@ -34,11 +36,16 @@ public class Enemy : MonoBehaviour
     {
         //target player with ai
         agent.SetDestination(player.position);
+        transform.LookAt(transform.position + agent.velocity);
         //rb.linearVelocity = new Vector3(agent.desiredVelocity.x, 0, agent.desiredVelocity.z);
         //agent.nextPosition = rb.position;
 
+        tipstarget[0].position = Vector3.Lerp(tipstarget[0].position, tipstargetPos[0], 0.1f);
+        tipstarget[1].position = Vector3.Lerp(tipstarget[1].position, tipstargetPos[1], 0.1f);
+        tipstarget[2].position = Vector3.Lerp(tipstarget[2].position, tipstargetPos[2], 0.1f);
+        tipstarget[3].position = Vector3.Lerp(tipstarget[3].position, tipstargetPos[3], 0.1f);
 
-       // Vector3.Lerp()
+        // Vector3.Lerp()
 
         if (timer[0] <= 0)
         {
@@ -46,7 +53,7 @@ public class Enemy : MonoBehaviour
             timer[0] = 40;
             RaycastHit hit;
             Physics.Raycast(offsets[0].position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"));
-            tipstarget[0].position = hit.point;
+            tipstargetPos[0] = hit.point;
 
         }
         else
@@ -60,7 +67,7 @@ public class Enemy : MonoBehaviour
             timer[2] = 40;
             RaycastHit hit;
             Physics.Raycast(offsets[2].position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"));
-            tipstarget[2].position = hit.point;
+            tipstargetPos[2] = hit.point;
         }
         else
         {
@@ -74,7 +81,7 @@ public class Enemy : MonoBehaviour
             timer[1] = 40;
             RaycastHit hit;
             Physics.Raycast(offsets[1].position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"));
-            tipstarget[1].position = hit.point;
+            tipstargetPos[1] = hit.point;
         }
         else
         {
@@ -87,7 +94,7 @@ public class Enemy : MonoBehaviour
             timer[3] = 40;
             RaycastHit hit;
             Physics.Raycast(offsets[3].position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"));
-            tipstarget[3].position = hit.point;
+            tipstargetPos[3] = hit.point;
         }
         else
         {

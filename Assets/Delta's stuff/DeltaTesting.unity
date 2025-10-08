@@ -2432,13 +2432,18 @@ MonoBehaviour:
   - {fileID: 699402536}
   - {fileID: 195643388}
   - {fileID: 1888900908}
+  tipstargetPos:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   timer: 00000000000000000000000000000000
   offsets:
   - {fileID: 1771417105}
   - {fileID: 297028789}
   - {fileID: 971907423}
   - {fileID: 1229738123}
-  rb: {fileID: 1164396542}
+  rb: {fileID: 0}
 --- !u!195 &1164396544
 NavMeshAgent:
   m_ObjectHideFlags: 0
