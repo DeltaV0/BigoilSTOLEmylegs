@@ -17,9 +17,12 @@ public class Enemy : MonoBehaviour
     public int[] timer;
 
     public Transform[] offsets;
+
+    public Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //agent.updatePosition = false;
         //offset timers
         timer[1] = 10;
         timer[2] = 20;
@@ -31,6 +34,8 @@ public class Enemy : MonoBehaviour
     {
         //target player with ai
         agent.SetDestination(player.position);
+        //rb.linearVelocity = new Vector3(agent.desiredVelocity.x, 0, agent.desiredVelocity.z);
+        //agent.nextPosition = rb.position;
 
 
        // Vector3.Lerp()
