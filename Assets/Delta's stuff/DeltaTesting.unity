@@ -2333,7 +2333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1159096366}
   m_Layer: 0
-  m_Name: EnemyHolder
+  m_Name: john
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2443,6 +2443,8 @@ MonoBehaviour:
   - {fileID: 297028789}
   - {fileID: 971907423}
   - {fileID: 1229738123}
+  head: {fileID: 0}
+  eyes: []
   rb: {fileID: 1164396542}
 --- !u!195 &1164396544
 NavMeshAgent:
