@@ -31,9 +31,9 @@ public class Enemy : MonoBehaviour
     {
         //agent.updatePosition = false;
         //offset timers
-        timer[1] = 10;
-        timer[2] = 20;
-        timer[3] = 30;
+        timer[1] = 20;
+        timer[2] = 40;
+        timer[3] = 60;
     }
 
     // Update is called once per frame
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(player.position);
         transform.LookAt(transform.position + agent.velocity);
 
-        head.DODynamicLookAt(player.position, 1f);
+        head.DODynamicLookAt(player.position, 10f);
 
         for (int a = 0; a < eyes.Length; a++)
         {
@@ -55,11 +55,11 @@ public class Enemy : MonoBehaviour
             if (timer[i] <= 0)
             {
                 //move leg x
-                timer[i] = 40;
+                timer[i] = 80;
                 RaycastHit hit;
                 Physics.Raycast(offsets[i].position + agent.velocity * 0.5f, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"));
                 tipstargetPos[i] = hit.point;
-                tipstarget[i].DOJump(tipstargetPos[i], Vector3.Distance(tipstarget[i].position, tipstargetPos[i]) * 0.25f, 1, 0.25f);
+                tipstarget[i].DOJump(tipstargetPos[i], Vector3.Distance(tipstarget[i].position, tipstargetPos[i]) * 0.25f, 1, 0.5f);
                 //transform.DOShakeRotation(0.1f, 22.5f, 1, 22.5f, true);
 
             }
