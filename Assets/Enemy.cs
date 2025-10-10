@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(player.position);
         transform.LookAt(transform.position + agent.velocity);
 
-        head.DODynamicLookAt(player.position, 10f);
+        head.DODynamicLookAt(player.position, 5f);
 
         for (int a = 0; a < eyes.Length; a++)
         {
@@ -57,9 +57,9 @@ public class Enemy : MonoBehaviour
                 //move leg x
                 timer[i] = 80;
                 RaycastHit hit;
-                Physics.Raycast(offsets[i].position + agent.velocity * 0.5f, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"));
+                Physics.Raycast(offsets[i].position + agent.velocity * 1.25f, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"));
                 tipstargetPos[i] = hit.point;
-                tipstarget[i].DOJump(tipstargetPos[i], Vector3.Distance(tipstarget[i].position, tipstargetPos[i]) * 0.25f, 1, 0.5f);
+                tipstarget[i].DOJump(tipstargetPos[i], Vector3.Distance(tipstarget[i].position, tipstargetPos[i]) * 0.2f, 1, 0.5f);
                 //transform.DOShakeRotation(0.1f, 22.5f, 1, 22.5f, true);
 
             }
