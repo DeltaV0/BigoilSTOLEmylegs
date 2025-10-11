@@ -181,11 +181,11 @@ public class BlurrWheelchair : MonoBehaviour
         //calculate and turn the chair
         float targetRotSpeed = 0f;
 
-        if (isTurningLeft && !isTurningRight && !halt.stopped)
+        if (isTurningLeft && !isTurningRight)
         {
             targetRotSpeed = -rotMaxSpeed;
         }
-        else if (isTurningRight && !isTurningLeft && !halt.stopped)
+        else if (isTurningRight && !isTurningLeft)
         {
             targetRotSpeed = rotMaxSpeed;
         }
@@ -211,7 +211,7 @@ public class BlurrWheelchair : MonoBehaviour
     private void NormalControlsMovement()
     {
         //includes only the specific logic for this movement mode
-        if (isTurningLeft && isTurningRight && !halt.stopped)
+        if (isTurningLeft && isTurningRight)
         {
             isMovingForward = true;
         }

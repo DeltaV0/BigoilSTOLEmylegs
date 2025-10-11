@@ -14,5 +14,5 @@ public class BlurrInventory : MonoBehaviour
 
     //keycardlevel is gonna be for upgrading the access you have to the map, that seems a lot easier that a bunch of different keys
 
-    }
+    
 }
