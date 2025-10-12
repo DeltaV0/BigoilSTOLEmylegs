@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
     public Transform patrolPoints;
 
-    public Transform playerLastSeen;
+    public Vector3 playerLastSeen;
 
     public int wait;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     {
         navMeshPath = new NavMeshPath();
         agent.SetDestination(transform.position);
+        playerLastSeen = transform.position;
         //agent.updatePosition = false;
         //offset timers
         timer[1] = 20;
@@ -50,31 +51,40 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //unused rn
         if (wait > 0)
         {
             wait--;
         }
         //more advanced system ig
+        //calc path
+        NavMeshHit hit25;
         pathAvailable = agent.CalculatePath(player.position, navMeshPath);
-        if (agent.Raycast(target.position) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+        //idk what's broken here but the pathfinding is a bit broke
+        if (!agent.Raycast(player.position, out hit25) && navMeshPath.status == NavMeshPathStatus.PathComplete)
         {
+            //go to player if player is visible and it can actually get to the player
             agent.SetDestination(player.position);
+            //set the variable to the last seen position
             playerLastSeen = player.position;
         }
         else
         {
-            agent.SetDestination(playerLastSeen.position);
+            //if it cant see the player, go to the last seen player position
+            agent.SetDestination(playerLastSeen);
         }
-            
-        transform.LookAt(transform.position + agent.velocity);
+        //rotate body towards where moving (maybe not?)    
+        //transform.LookAt(transform.position + agent.velocity);
 
+        //look at player
         head.DODynamicLookAt(player.position, 5f);
 
+        //move eyes seperately
         for (int a = 0; a < eyes.Length; a++)
         {
             eyes[a].DODynamicLookAt(player.position, 0.1f);
-         }
-
+        }
+        //go through all timers moving legs if it's zero
         for (int i = 0; i < tipstarget.Length; i++)
         {
             if (timer[i] <= 0)
